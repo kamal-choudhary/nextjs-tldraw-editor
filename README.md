@@ -29,6 +29,9 @@ A Next.js application with an interactive editor built on tldraw.
 # Clone repository
 git clone https://github.com/kamal-choudhary/nextjs-tldraw-editor.git
 
+# Change into the project directory
+cd nextjs-tldraw-editor
+
 # Create env file (.env.development.local) in the root directory
 # Note: This file was attached in the email to Talent Director: Lucia Perez
 
