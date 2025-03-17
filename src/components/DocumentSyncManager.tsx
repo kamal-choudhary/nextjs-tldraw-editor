@@ -37,7 +37,7 @@ export default function DocumentSyncManager() {
       loadSnapshot(editor.store, loadedDocument.document)
       setSaveStatus('ready')
     } catch (error) {
-      console.error('Error loading drawing:', error)
+      console.error('Error loading document:', error)
       setSaveStatus('error')
     }
   }, [loadedDocument])

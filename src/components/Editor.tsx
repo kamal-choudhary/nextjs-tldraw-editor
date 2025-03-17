@@ -71,7 +71,6 @@ export default function Editor() {
     <div style={{ position: 'fixed', inset: 0 }}>
       <Tldraw
         tools={customTools}
-        initialState={VIDEXT_TOOL_ID}
         overrides={uiOverrides}
         components={components}
         assetUrls={customAssetUrls}

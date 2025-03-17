@@ -28,9 +28,17 @@ export const documentRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      await redis.set(TLDRAW_DOCUMENT_KEY, input.document)
-      return {
-        success: true
+      try {
+        await redis.set(TLDRAW_DOCUMENT_KEY, input.document)
+        return {
+          success: true
+        }
+      } catch (error) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to save document',
+          cause: error
+        })
       }
     }),
   load: procedure.query(async () => {
@@ -48,10 +56,6 @@ export const documentRouter = router({
         document
       }
     } catch (error) {
-      if (error instanceof TRPCError) {
-        throw error
-      }
-
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
         message: 'Failed to retrieve document',
