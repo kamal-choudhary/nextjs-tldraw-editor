@@ -7,6 +7,8 @@ import { TLStoreSnapshot } from 'tldraw'
 
 const redis = Redis.fromEnv()
 
+const TLDRAW_DOCUMENT_KEY = 'tldraw_document'
+
 export const documentRouter = router({
   save: procedure
     .input(
@@ -26,14 +28,14 @@ export const documentRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      await redis.set('tldraw_document', input.document)
+      await redis.set(TLDRAW_DOCUMENT_KEY, input.document)
       return {
         success: true
       }
     }),
   load: procedure.query(async () => {
     try {
-      const document = await redis.get('tldraw_document')
+      const document = await redis.get(TLDRAW_DOCUMENT_KEY)
 
       if (!document) {
         throw new TRPCError({
